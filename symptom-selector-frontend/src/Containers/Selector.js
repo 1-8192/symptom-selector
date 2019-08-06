@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Selector extends Component {
     state = {
         symptoms: [],
-        selectedValue: ""
+        diagnosis: ""
     }
 
     componentDidMount(){
@@ -18,10 +18,13 @@ class Selector extends Component {
     }
 
     handleSelect = (event) => {
-        this.setState({
-            selectedValue: event.target.value
+        fetch(`http://localhost:3000/symptoms/${event.target.value}`)
+        .then(response => response.json())
+        .then(data => {
+            this.setState({
+                diagnosis: data
+            })
         })
-        console.log(event.target.value)
     }
 
     render(){
@@ -29,8 +32,12 @@ class Selector extends Component {
             <div>
                 <h2> Please select your symptoms: </h2>
                 <select onChange={this.handleSelect} value={this.state.selectedValue}>
-                    {this.state.symptoms.map(symptom => <option key={symptom.id} value={symptom.name}>{symptom.name}</option>)}
+                    {this.state.symptoms.map(symptom => <option key={symptom.id} value={symptom.id}>{symptom.name}</option>)}
                 </select>
+                <h2>Recommended Diagnosis:</h2>
+                {
+                    (this.state.diagnosis !== "") ? 
+                <p>{this.state.diagnosis.name}</p> : <p>Please select a symptom</p>}
             </div>
         )
     }

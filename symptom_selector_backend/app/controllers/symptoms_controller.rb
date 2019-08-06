@@ -7,6 +7,7 @@ class SymptomsController < ApplicationController
 
     def show
         @symptom = Symptom.find(params[:id])
-        render json: @symptom
+        @diagnosis = @symptom.get_diagnosis
+        render json: @diagnosis
     end 
 end
