@@ -12,7 +12,7 @@ require 'byebug'
 Symptom.destroy_all
 Diagnosis.destroy_all
 
-data = CSV.read('./lib/assets/symptoms (1).csv')
+data = CSV.read('./lib/symptoms (1).csv')
 
 data.each do |line|
     Symptom.create(name: line[0])
@@ -21,3 +21,5 @@ data.each do |line|
         Diagnosis.create(name: line[i], frequency: 0, symptom_id: id)
     end 
 end
+
+byebug

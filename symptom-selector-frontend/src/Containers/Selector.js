@@ -9,6 +9,7 @@ class Selector extends Component {
         fetch('http://localhost:3000/symptoms')
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             this.setState({
                 symptoms: data
             })
@@ -19,7 +20,6 @@ class Selector extends Component {
         return (
             <div>
                 <h2> Please select your symptoms </h2>
-                <p>{this.state.symptoms[0].name}</p>
             </div>
         )
     }
