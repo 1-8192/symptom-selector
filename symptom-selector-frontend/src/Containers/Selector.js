@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Selector extends Component {
     state = {
         symptoms: [],
-        diagnosis: ""
+        diagnoses: []
     }
 
     componentDidMount(){
@@ -22,9 +22,13 @@ class Selector extends Component {
         .then(response => response.json())
         .then(data => {
             this.setState({
-                diagnosis: data
+                diagnoses: data
             })
         })
+    }
+
+    handleClick = (event) => {
+        console.log(event.target.value)
     }
 
     render(){
@@ -36,8 +40,13 @@ class Selector extends Component {
                 </select>
                 <h2>Recommended Diagnosis:</h2>
                 {
-                    (this.state.diagnosis !== "") ? 
-                <p>{this.state.diagnosis.name}</p> : <p>Please select a symptom</p>}
+                    (this.state.diagnoses.length > 0) ? 
+                <div>
+                    <p>{this.state.diagnoses[0].name}</p>
+                    <p>Are you happy with our diagnosis?</p>
+                    <button onClick={this.handleClick}value="yes">Yes</button>
+                    <button onClick={this.handleClick}value="no">No</button>
+                </div> : <p>Please select a symptom</p>}
             </div>
         )
     }

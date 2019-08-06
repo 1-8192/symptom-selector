@@ -1,7 +1,7 @@
 class Symptom < ApplicationRecord
     has_many :diagnoses, dependent: :delete_all
 
-    def get_diagnosis
+    def sorted_diagnoses
         array = self.diagnoses
         for i in 0..array.length-1 do 
             for j in i+1..array.length-1 do 
@@ -14,7 +14,7 @@ class Symptom < ApplicationRecord
             end
             i +=1
         end
-        return array[0]
+        return array
     end 
 
 end
