@@ -21,5 +21,3 @@ data.each do |line|
         Diagnosis.create(name: line[i], frequency: 0, symptom_id: id)
     end 
 end
-
-byebug
