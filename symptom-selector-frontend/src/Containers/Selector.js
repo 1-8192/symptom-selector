@@ -88,6 +88,7 @@ class Selector extends Component {
                     <button onClick={this.handleClearClick}>Start over</button>
                     <h2> Please select your symptoms: </h2>
                         <select onChange={this.handleSelect} value={this.state.selectedValue}>
+                        <option value="blank">Please select</option>
                         {this.state.symptoms.map(symptom => <option key={symptom.id} value={symptom.id}>{symptom.name}</option>)}
                      </select>
                     <h2>Recommended Diagnosis:</h2>
@@ -102,10 +103,11 @@ class Selector extends Component {
                     {
                         (this.state.diagnosis_solved === true) ? 
                         this.state.diagnoses.map(diagnosis => <p>{diagnosis.name} | {diagnosis.frequency} cases</p>) : 
+                        (this.state.diagnosis_solved === false) ?
                         <div>
                             <h2>Please pick another diagnosis</h2>
                             {this.state.diagnoses.map(diagnosis => <button onClick={this.handleDiagnosisClick} value={diagnosis.id} key={diagnosis.id} data-test={diagnosis.frequency}>{diagnosis.name}</button>)}
-                        </div>
+                        </div> : null
                     }
                 </div>
         )

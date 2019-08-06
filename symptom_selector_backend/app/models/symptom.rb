@@ -3,7 +3,15 @@ class Symptom < ApplicationRecord
 
     def sorted_diagnoses
         array = self.diagnoses.sort_by { |i| i["frequency"] }
-        return array.reverse
+        if array == self.diagnoses 
+            i = rand(0..self.diagnoses.length-1)
+            temp = array[0]
+            array[0] = array[i]
+            array[i] = temp 
+            return array 
+        else 
+            return array.reverse
+        end 
     end 
 
 end
