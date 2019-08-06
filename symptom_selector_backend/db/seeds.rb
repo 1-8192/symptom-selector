@@ -9,5 +9,17 @@
 require 'csv'
 require 'byebug'
 
+Symptom.destroy_all
+Diagnosis.destroy_all
+
+data = CSV.read('./lib/assets/symptoms (1).csv')
+
+data.each do |line|
+    Symptom.create(name: line[0])
+    id = Symptom.find_by(name: line[0]).id
+    for i in 1..line.length-1 do
+        Diagnosis.create(name: line[i], frequency: 0, symptom_id: id)
+    end 
+end
+
 byebug
-CSV.read('./lib/assets/symptoms (1).csv')
