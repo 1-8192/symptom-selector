@@ -63,6 +63,7 @@ class Selector extends Component {
         this.setState({
             diagnosis_solved: true
         })
+        alert('Thank you! Hope you feel better!')
     }
 
     handleClearClick = () => {
@@ -102,7 +103,10 @@ class Selector extends Component {
                     </div> : <p>Please select a symptom</p>}
                     {
                         (this.state.diagnosis_solved === true) ? 
-                        this.state.diagnoses.map(diagnosis => <p>{diagnosis.name} | {diagnosis.frequency} cases</p>) : 
+                        <div>
+                        <h2>Here are other common diagnoses</h2>
+                        {this.state.diagnoses.map(diagnosis => <p>{diagnosis.name} | {diagnosis.frequency} cases</p>)}
+                        </div> : 
                         (this.state.diagnosis_solved === false) ?
                         <div>
                             <h2>Please pick another diagnosis</h2>
